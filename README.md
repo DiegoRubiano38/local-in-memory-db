@@ -1,2 +1,2 @@
 # local-in-memory-db
-Samll exercise
+Small exercise
