@@ -30,6 +30,11 @@ public class LocalDatabaseImpl implements LocalDatabase {
     @Override
     public boolean compareAndSet(int timestamp, String key, String field, int value, int expectedValue, int newValue) {
 
+        if (!inMemory.containsKey(key) || !inMemory.get(key).containsKey(field))
+        {
+            return false;
+        }
+
         HashMap<String, Integer> currentMap = inMemory.get(key);
 
         int currentValue = currentMap.get(field);
@@ -45,6 +50,11 @@ public class LocalDatabaseImpl implements LocalDatabase {
 
     @Override
     public boolean compareAndDelete(int timestamp, String key, String field, int expectedValue) {
+
+        if (!inMemory.containsKey(key) || !inMemory.get(key).containsKey(field))
+        {
+            return false;
+        }
 
         HashMap<String, Integer> currentMap = inMemory.get(key);
 

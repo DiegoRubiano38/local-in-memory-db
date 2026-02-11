@@ -35,5 +35,7 @@ class LocalDatabaseImplTest {
         assertTrue(database.compareAndDelete(timestamp, "A", "C", 100));
         assertEquals(Optional.empty(), database.get(timestamp, "A", "C"));
         assertEquals(Optional.of(30), database.get(timestamp, "A", "B"));
+        assertFalse(database.compareAndSet(1, "unknownKey", "age", 0, 10, 20));
+        assertFalse(database.compareAndSet(1, null, "age", 0, 10, 20));
     }
 }
